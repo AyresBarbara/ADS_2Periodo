@@ -1,13 +1,14 @@
-const pokemon = "Bulbasauro"
+//const pokemon = "Bulbasauro"
+const pokemon = prompt("Informe o pokemom: ")
 
 switch (pokemon) {
-    case "Bulbasauro":
+    case "bulbasauro":
         console.log("Tipo: planta e veneno")
         break;
-    case "Charmander":
+    case "charmander":
         console.log("Tipo: fogo")
         break;
-    case "Squirtle":
+    case "squirtle":
         console.log("Tipo: água")
         break;
 
