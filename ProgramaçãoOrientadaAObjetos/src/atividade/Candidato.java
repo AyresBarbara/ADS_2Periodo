@@ -1,18 +1,19 @@
 package atividade;
 
 public class Candidato {
-	
+	//Minhas variaveis
 	private String nomeCandidato;
 	private int numCandidato;
 	private int numVotos;
 	
+	//Construtor da minha Classe
 	public Candidato(String nomeCandidato, int numCandidato) {
 		super();
 		this.nomeCandidato = nomeCandidato;
 		this.numCandidato = numCandidato;
 		this.numVotos = 0;
 	}
-
+	//Metodos de acesso
 	public String getNomeCandidato() {
 		return nomeCandidato;
 	}
@@ -24,11 +25,9 @@ public class Candidato {
 	public int getNumVotos() {
 		return numVotos;
 	}
-
+	//Meus metodos 
 	public void incrementarNumVotos() {
 		numVotos += 1;
 	}
-	public void exibirVotos() {
-		System.out.println("O número de votos do candidato "+ getNomeCandidato() +" é: "+ getNumVotos());
-	}
+	
 }
