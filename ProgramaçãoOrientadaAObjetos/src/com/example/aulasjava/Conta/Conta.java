@@ -1,4 +1,4 @@
-package aulasJava;
+package com.example.aulasjava.Conta;
 
 public class Conta {
 	private int num;
