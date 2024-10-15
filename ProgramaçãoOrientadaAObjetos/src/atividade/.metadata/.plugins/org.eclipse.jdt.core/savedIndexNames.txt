@@ -1,0 +1,1 @@
+INDEX VERSION 1.134+C:\Users\aluno\Desktop\ADS_2Periodo\ProgramaçãoOrientadaAObjetos\src\atividade\.metadata\.plugins\org.eclipse.jdt.core

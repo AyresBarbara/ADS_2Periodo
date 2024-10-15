@@ -27,7 +27,7 @@ public class Candidato {
 	}
 	//Meus metodos 
 	public void incrementarNumVotos() {
-		numVotos += 1;
+		this.numVotos += 1;
 	}
 	
 }
