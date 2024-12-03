@@ -10,7 +10,7 @@ PRIMARY KEY(`cpf_professor`)
 );
 create table `tb_alunos`(
 `cpf_aluno` varchar(11) not null,
-`nome_comnpleto_aluno` varchar(255) not null,
+`nome_completo_aluno` varchar(255) not null,
 `email_aluno` varchar(100) not null,
 `endereco_aluno` varchar(255) not null,
 `data_nascimento_aluno`date not null,
@@ -45,3 +45,39 @@ primary key(`codigo_matricula`),
 FOREIGN KEY(`cpf_aluno`) references tb_alunos(`cpf_aluno`),
 FOREIGN KEY(`codigo_disciplina`) references tb_disciplinas(`codigo_disciplina`)
 );
+create unique index idx_cpf_aluno ON tb_alunos(cpf_aluno); 
+create unique index idx_cpf_professor ON tb_professores(cpf_professor);
+DELIMITER $$
+
+CREATE TRIGGER valida_nota_avaliacao
+BEFORE INSERT ON tb_avaliacao
+FOR EACH ROW
+BEGIN
+    IF NEW.nota_avaliacao < 0 OR NEW.nota_avaliacao > 10 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A nota de avaliação deve estar entre 0 e 10.';
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE obter_notas_por_disciplina(IN p_codigo_disciplina VARCHAR(10))
+BEGIN
+    SELECT 
+        a.nome_completo_aluno,
+        m.data_matricula,
+        COALESCE(AVG(av.nota_avaliacao), 0) AS media_nota
+    FROM 
+        tb_matricula m
+    JOIN 
+        tb_alunos a ON m.cpf_aluno = a.cpf_aluno
+    LEFT JOIN 
+        tb_avaliacao av ON av.cpf_aluno = a.cpf_aluno AND av.codigo_disciplina = p_codigo_disciplina
+    WHERE 
+        m.codigo_disciplina = p_codigo_disciplina
+    GROUP BY 
+        a.cpf_aluno, m.data_matricula;
+END $$
+
+DELIMITER ;
